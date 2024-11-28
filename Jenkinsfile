@@ -1,20 +1,20 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        sh 'npm install'
-      }
+    agent any
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/usuario/Trabalho_DevOps_[RA].git'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh 'python -m unittest discover'
+            }
+        }
+        stage('Build and Deploy') {
+            steps {
+                sh 'docker-compose up --build -d'
+            }
+        }
     }
-    stage('Test') {
-      steps {
-        sh 'npm test'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        sh 'npm run deploy'
-      }
-    }
-  }
 }
