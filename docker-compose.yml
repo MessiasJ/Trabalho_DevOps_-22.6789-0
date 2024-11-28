@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    image: my-web-app
+    build: .
+    ports:
+      - "80:80"
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: example
